@@ -73,7 +73,6 @@
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MSMFB_WRITEBACK_SET_MIRRORING_HINT _IOW(MSMFB_IOCTL_MAGIC, 167,   unsigned int)
 #define MSMFB_ASYNC_BLIT _IOW(MSMFB_IOCTL_MAGIC, 168, unsigned int)
-#define MSMFB_OVERLAY_PREPARE _IOWR(MSMFB_IOCTL_MAGIC, 169,   struct mdp_overlay_list)
 #define FB_TYPE_3D_PANEL 0x10101010
 #define MDP_IMGTYPE2_START 0x10000
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
@@ -165,7 +164,6 @@ enum {
 #define MDP_BLUR 0x10
 #define MDP_BLEND_FG_PREMULT 0x20000
 #define MDP_IS_FG 0x40000
-#define MDP_SOLID_FILL 0x00000020
 #define MDP_DEINTERLACE 0x80000000
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MDP_SHARPENING 0x40000000
@@ -189,13 +187,11 @@ enum {
 #define MDP_BORDERFILL_SUPPORTED 0x00010000
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MDP_SECURE_OVERLAY_SESSION 0x00008000
-#define MDP_SECURE_DISPLAY_OVERLAY_SESSION 0x00002000
 #define MDP_OV_PIPE_FORCE_DMA 0x00004000
 #define MDP_MEMORY_ID_TYPE_FB 0x00001000
 #define MDP_BWC_EN 0x00000400
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MDP_DECIMATION_EN 0x00000800
-#define MDP_SMP_FORCE_ALLOC 0x00200000
 #define MDP_TRANSP_NOP 0xffffffff
 #define MDP_ALPHA_NOP 0xff
 #define MDP_FB_PAGE_PROTECTION_NONCACHED (0)
@@ -426,38 +422,25 @@ enum mdss_mdp_blend_op {
  BLEND_OP_MAX,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
-enum mdp_overlay_pipe_type {
- PIPE_TYPE_AUTO = 0,
- PIPE_TYPE_VIG,
- PIPE_TYPE_RGB,
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- PIPE_TYPE_DMA,
- PIPE_TYPE_CURSOR,
- PIPE_TYPE_MAX,
-};
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 struct mdp_overlay {
  struct msmfb_img src;
  struct mdp_rect src_rect;
- struct mdp_rect dst_rect;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ struct mdp_rect dst_rect;
  uint32_t z_order;
  uint32_t is_fg;
  uint32_t alpha;
- uint32_t blend_op;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ uint32_t blend_op;
  uint32_t transp_mask;
  uint32_t flags;
- uint32_t pipe_type;
  uint32_t id;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- uint8_t priority;
- uint32_t user_data[6];
- uint32_t bg_color;
+ uint32_t user_data[7];
  uint8_t horz_deci;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  uint8_t vert_deci;
  struct mdp_overlay_pp_params overlay_pp_cfg;
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct msmfb_overlay_3d {
  uint32_t is_3d;
@@ -805,9 +788,7 @@ enum {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  metadata_op_vic,
  metadata_op_wb_format,
- metadata_op_wb_secure,
  metadata_op_get_caps,
- metadata_op_get_ion_fd,
  metadata_op_crc,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  metadata_op_max
@@ -839,17 +820,14 @@ struct msmfb_metadata {
  struct mdp_blend_cfg blend_cfg;
  struct mdp_mixer_cfg mixer_cfg;
  uint32_t panel_frame_rate;
- uint8_t secure_en;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  uint32_t video_info_code;
- int fbmem_ionfd;
  struct mdss_hw_caps caps;
  } data;
 };
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define MDP_MAX_FENCE_FD 32
 #define MDP_BUF_SYNC_FLAG_WAIT 1
-#define MDP_BUF_SYNC_FLAG_RETIRE_FENCE 0x10
 struct mdp_buf_sync {
  uint32_t flags;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
@@ -872,16 +850,6 @@ struct mdp_display_commit {
  uint32_t flags;
  uint32_t wait_for_finish;
  struct fb_var_screeninfo var;
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- struct mdp_rect l_roi;
- struct mdp_rect r_roi;
-};
-struct mdp_overlay_list {
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- uint32_t num_overlays;
- struct mdp_overlay **overlay_list;
- uint32_t flags;
- uint32_t processed_overlays;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 };
 struct mdp_page_protection {
