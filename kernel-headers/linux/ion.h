@@ -27,6 +27,7 @@ enum ion_heap_type {
  ION_HEAP_TYPE_SYSTEM_CONTIG,
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
  ION_HEAP_TYPE_CARVEOUT,
+ ION_HEAP_TYPE_CHUNK,
  ION_HEAP_TYPE_CUSTOM,
  ION_NUM_HEAPS = 16,
 };
@@ -34,6 +35,7 @@ enum ion_heap_type {
 #define ION_HEAP_SYSTEM_MASK (1 << ION_HEAP_TYPE_SYSTEM)
 #define ION_HEAP_SYSTEM_CONTIG_MASK (1 << ION_HEAP_TYPE_SYSTEM_CONTIG)
 #define ION_HEAP_CARVEOUT_MASK (1 << ION_HEAP_TYPE_CARVEOUT)
+#define ION_NUM_HEAP_IDS sizeof(unsigned int) * 8
 #define ION_FLAG_CACHED 1
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #define ION_FLAG_CACHED_NEEDS_SYNC 2
@@ -41,7 +43,7 @@ struct ion_allocation_data {
  size_t len;
  size_t align;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- unsigned int heap_id_mask;
+ unsigned int heap_mask;
  unsigned int flags;
  ion_user_handle_t handle;
 };
